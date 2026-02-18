@@ -1,6 +1,56 @@
-# claude-code-skills
+# agent-skills
 
-A curated collection of **33 Claude Code skills** for different programming languages, frameworks, and development workflows. Each skill is a `SKILL.md` file following the official [Claude Code skills format](https://code.claude.com/docs/en/skills) that teaches Claude best practices for a specific technology or task.
+A curated collection of **33 Agent Skills** for different programming languages, frameworks, and development workflows. Each skill is a `SKILL.md` file following the open [Agent Skills standard](https://agentskills.io/) — compatible with **both Claude Code and GitHub Copilot**.
+
+## Compatibility
+
+These skills use the **Agent Skills open standard** (`SKILL.md` format) which is supported across multiple AI coding agents:
+
+| Agent | Project Skills | Personal Skills | Status |
+|-------|---------------|-----------------|--------|
+| **Claude Code** | `.claude/skills/` | `~/.claude/skills/` | Fully supported |
+| **GitHub Copilot** (VS Code) | `.github/skills/` or `.claude/skills/` | `~/.copilot/skills/` or `~/.claude/skills/` | Fully supported |
+| **GitHub Copilot CLI** | `.github/skills/` or `.claude/skills/` | `~/.copilot/skills/` | Fully supported |
+| **Copilot Coding Agent** | `.github/skills/` or `.claude/skills/` | N/A (cloud-based) | Fully supported |
+
+### SKILL.md format (shared standard)
+
+Both Claude Code and GitHub Copilot use the same file format:
+
+```markdown
+---
+name: skill-name                    # Required: lowercase, hyphens
+description: What it does            # Required: when to use it
+disable-model-invocation: false      # Optional: manual-only if true
+user-invocable: true                 # Optional: show in /slash menu
+argument-hint: "[args]"              # Optional: hint for arguments
+allowed-tools: Read, Grep, Glob     # Optional: restrict tool access (Claude Code)
+context: fork                        # Optional: run in subagent (Claude Code)
+---
+
+# Skill Instructions
+
+Your detailed instructions, guidelines, and examples here...
+```
+
+### How it differs from custom instructions
+
+| Feature | Agent Skills (`SKILL.md`) | Custom Instructions |
+|---------|--------------------------|---------------------|
+| **Format** | Open standard ([agentskills.io](https://agentskills.io/)) | Vendor-specific |
+| **Loading** | On-demand (only when relevant) | Always applied |
+| **Content** | Instructions + scripts + examples | Instructions only |
+| **Portability** | Works across Claude Code, Copilot, CLI | Single platform |
+| **Invocation** | Auto-loaded or `/slash` command | Always injected |
+
+Custom instructions files are still useful for always-on repo conventions:
+
+| File | Platform | Purpose |
+|------|----------|---------|
+| `.github/copilot-instructions.md` | GitHub Copilot | Repo-wide coding standards |
+| `.github/instructions/*.instructions.md` | GitHub Copilot | Path-specific rules (with `applyTo` glob) |
+| `CLAUDE.md` | Claude Code | Repo-wide context and conventions |
+| `AGENTS.md` | Multi-agent (OpenAI standard) | General agent instructions |
 
 ## Quick Start
 
@@ -8,27 +58,35 @@ A curated collection of **33 Claude Code skills** for different programming lang
 
 ```bash
 # Clone the repo
-git clone https://github.com/<your-username>/claude-code-skills.git
+git clone https://github.com/<your-username>/agent-skills.git
 
-# Run the install script
-cd claude-code-skills
+# Install to both Claude Code and GitHub Copilot
+cd agent-skills
 bash install.sh
+
+# Or install to a specific target only
+bash install.sh --target claude
+bash install.sh --target copilot
 ```
 
 ### Install for a specific project only
 
 ```bash
-# Copy specific skills into your project
+# For Claude Code
 cp -r skills/python-pro /path/to/your/project/.claude/skills/
-cp -r skills/fastapi-developer /path/to/your/project/.claude/skills/
+
+# For GitHub Copilot
+cp -r skills/python-pro /path/to/your/project/.github/skills/
+
+# Both agents read from .claude/skills/, so this works for both:
+cp -r skills/python-pro /path/to/your/project/.claude/skills/
 ```
 
-### Install a single skill
+### Install specific skills only
 
 ```bash
-# Copy one skill to your personal Claude Code config
-mkdir -p ~/.claude/skills
-cp -r skills/typescript-pro ~/.claude/skills/
+bash install.sh python-pro typescript-pro react-specialist
+bash install.sh --target copilot docker-expert terraform-engineer
 ```
 
 ## Available Skills
@@ -93,25 +151,33 @@ cp -r skills/typescript-pro ~/.claude/skills/
 
 ## How It Works
 
-Claude Code uses a **SKILL.md** file format to extend its capabilities:
+Both Claude Code and GitHub Copilot use `SKILL.md` files to extend their capabilities:
 
 ```
 skills/python-pro/
-└── SKILL.md        # Instructions Claude follows when working with Python
+└── SKILL.md        # Instructions the agent follows when working with Python
 ```
 
 Each `SKILL.md` has:
-- **YAML frontmatter** — name, description, and configuration
-- **Markdown body** — conventions, patterns, and rules for Claude to follow
+- **YAML frontmatter** — `name`, `description`, and configuration fields
+- **Markdown body** — conventions, patterns, and rules for the agent to follow
 
-Skills are auto-loaded by Claude when relevant to your work. Skills with `disable-model-invocation: true` are only triggered when you explicitly call them with `/skill-name`.
+Skills are auto-loaded when the agent determines they're relevant to your work. Skills with `disable-model-invocation: true` are only triggered when you explicitly call them with `/skill-name`.
 
 ### Skill Types
 
 | Type | Behavior | Examples |
 |------|----------|---------|
-| **Reference** (auto-loaded) | Claude applies these conventions when working in the relevant language/framework | python-pro, react-specialist |
+| **Reference** (auto-loaded) | Agent applies these conventions when working in the relevant language/framework | python-pro, react-specialist |
 | **Task** (manual `/invoke`) | You trigger these when you want a specific action performed | security-reviewer, test-generator |
+
+### Progressive Loading
+
+Agents use a 3-level loading system to keep context efficient:
+
+1. **Discovery** — Agent reads `name` + `description` from frontmatter (always available, lightweight)
+2. **Instructions** — When relevant, the full `SKILL.md` body is loaded into context
+3. **Resources** — Scripts, examples, and other files in the skill directory load only when referenced
 
 ## Customization
 
@@ -120,8 +186,11 @@ Skills are auto-loaded by Claude when relevant to your work. Skills with `disabl
 Copy a skill to your project, edit it to match your team's conventions:
 
 ```bash
+# Claude Code
 cp -r ~/.claude/skills/python-pro .claude/skills/python-pro
-# Edit .claude/skills/python-pro/SKILL.md with your project's specific rules
+
+# GitHub Copilot
+cp -r ~/.copilot/skills/python-pro .github/skills/python-pro
 ```
 
 Project-level skills take priority over personal-level skills.
@@ -140,7 +209,7 @@ Your instructions here...
 EOF
 ```
 
-See the [official Claude Code skills docs](https://code.claude.com/docs/en/skills) for the full specification.
+See the [Agent Skills specification](https://agentskills.io/specification) for the full format reference.
 
 ## Contributing
 
