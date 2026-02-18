@@ -58,7 +58,7 @@ Custom instructions files are still useful for always-on repo conventions:
 
 ```bash
 # Clone the repo
-git clone https://github.com/<your-username>/ai-engineer-skills.git
+git clone https://github.com/ai-engineer-skills/ai-engineer-skills.git
 
 # Install to both Claude Code and GitHub Copilot
 cd ai-engineer-skills
