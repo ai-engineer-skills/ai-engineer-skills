@@ -99,8 +99,8 @@ install_skill() {
   done
 }
 
-echo "Agent Skills Installer"
-echo "======================"
+echo "AI Engineer Skills Installer"
+echo "============================"
 echo ""
 echo "Targets:"
 for target_dir in "${TARGETS[@]}"; do

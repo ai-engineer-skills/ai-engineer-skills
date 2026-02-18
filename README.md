@@ -1,4 +1,4 @@
-# agent-skills
+# AI Engineer Skills
 
 A curated collection of **33 Agent Skills** for different programming languages, frameworks, and development workflows. Each skill is a `SKILL.md` file following the open [Agent Skills standard](https://agentskills.io/) — compatible with **both Claude Code and GitHub Copilot**.
 
@@ -58,10 +58,10 @@ Custom instructions files are still useful for always-on repo conventions:
 
 ```bash
 # Clone the repo
-git clone https://github.com/<your-username>/agent-skills.git
+git clone https://github.com/<your-username>/ai-engineer-skills.git
 
 # Install to both Claude Code and GitHub Copilot
-cd agent-skills
+cd ai-engineer-skills
 bash install.sh
 
 # Or install to a specific target only
