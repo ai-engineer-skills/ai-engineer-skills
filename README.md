@@ -1,6 +1,6 @@
 # AI Engineer Skills
 
-A curated collection of **33 Agent Skills** for different programming languages, frameworks, and development workflows. Each skill is a `SKILL.md` file following the open [Agent Skills standard](https://agentskills.io/) — compatible with **both Claude Code and GitHub Copilot**.
+A curated collection of **36 Agent Skills** for different programming languages, frameworks, and development workflows. Each skill is a `SKILL.md` file following the open [Agent Skills standard](https://agentskills.io/) — compatible with **both Claude Code and GitHub Copilot**.
 
 ## Compatibility
 
@@ -127,6 +127,15 @@ bash install.sh --target copilot docker-expert terraform-engineer
 | **[spring-boot-engineer](skills/spring-boot-engineer)** | Spring Boot 3.2, Java 21, slice tests |
 | **[dotnet-core-expert](skills/dotnet-core-expert)** | ASP.NET Core, Minimal APIs, EF Core, xUnit |
 
+### Data & AI Infrastructure
+
+| Skill | Description |
+|-------|-------------|
+| **[database-architect](skills/database-architect)** | Schema design, indexing strategy, migrations, partitioning, PostgreSQL/MySQL/SQL Server |
+| **[vector-search-engineer](skills/vector-search-engineer)** | Vector databases, embeddings, HNSW/IVF indexes, pgvector, Pinecone, Qdrant, Weaviate, Milvus, FAISS |
+| **[rag-engineer](skills/rag-engineer)** | RAG pipelines, chunking strategies, hybrid search, reranking, prompt assembly, evaluation |
+| **[sql-pro](skills/sql-pro)** | SQL query writing, optimization, PostgreSQL/MySQL/SQLite |
+
 ### Infrastructure & DevOps
 
 | Skill | Description |
@@ -134,7 +143,6 @@ bash install.sh --target copilot docker-expert terraform-engineer
 | **[docker-expert](skills/docker-expert)** | Multi-stage builds, security, docker-compose |
 | **[terraform-engineer](skills/terraform-engineer)** | IaC modules, state management, tflint |
 | **[kubernetes-specialist](skills/kubernetes-specialist)** | Manifests, Helm, security contexts, GitOps |
-| **[sql-pro](skills/sql-pro)** | Schema design, indexing, query optimization |
 
 ### Workflow & Quality
 
