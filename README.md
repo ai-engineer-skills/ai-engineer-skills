@@ -1,6 +1,6 @@
 # AI Engineer Skills
 
-A curated collection of **36 Agent Skills** for different programming languages, frameworks, and development workflows. Each skill is a `SKILL.md` file following the open [Agent Skills standard](https://agentskills.io/) — compatible with **both Claude Code and GitHub Copilot**.
+A curated collection of **37 Agent Skills** for different programming languages, frameworks, and development workflows. Each skill is a `SKILL.md` file following the open [Agent Skills standard](https://agentskills.io/) — compatible with **both Claude Code and GitHub Copilot**.
 
 ## Compatibility
 
@@ -98,6 +98,7 @@ bash install.sh --target copilot docker-expert terraform-engineer
 | **[python-pro](skills/python-pro)** | Python 3.11+, type hints, ruff, pytest, modern patterns |
 | **[typescript-pro](skills/typescript-pro)** | Strict TypeScript, Zod, Vitest, discriminated unions |
 | **[javascript-pro](skills/javascript-pro)** | ES2024+, ESM, modern APIs, Vitest |
+| **[nodejs-expert](skills/nodejs-expert)** | Node.js 22+, native APIs, ESM, node:test, performance, production patterns |
 | **[rust-engineer](skills/rust-engineer)** | Ownership, thiserror/anyhow, clippy, idiomatic Rust |
 | **[golang-pro](skills/golang-pro)** | Effective Go, table-driven tests, error wrapping |
 | **[csharp-developer](skills/csharp-developer)** | C# 12, .NET 8, nullable refs, records, xUnit |
